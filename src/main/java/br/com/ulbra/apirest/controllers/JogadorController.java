@@ -30,4 +30,26 @@ public class JogadorController {
 
         return ResponseEntity.created(uri).body(jogador);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteJogador(@PathVariable Long id) {
+        jogadorService.deleteJogador(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Jogador> updateJogador(
+            @PathVariable Long id,
+            @RequestBody JogadorRequest jogadorAtualizado
+    ) {
+        Jogador jogador = jogadorService.updateJogador(id, jogadorAtualizado);
+        return ResponseEntity.ok(jogador);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<JogadorResponseDTO> getJogadorById(@PathVariable Long id) {
+        return ResponseEntity.ok(
+                this.jogadorService.getJogadorById(id)
+        );
+    }
 }

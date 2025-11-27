@@ -39,4 +39,20 @@ public class TreinadorController {
         this.treinadorService.deleteTreinador(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Treinador> updateTreinador(
+            @PathVariable Long id,
+            @RequestBody Treinador treinadorAtualizado
+    ) {
+        Treinador treinador = treinadorService.getTreinador(id);
+
+        treinador.setNome(treinadorAtualizado.getNome());
+        treinador.setTitulos(treinadorAtualizado.getTitulos());
+        treinador.setPremiosIndividuais(treinadorAtualizado.getPremiosIndividuais());
+        // Se quiser atualizar jogadores, faz isso separado
+
+        Treinador atualizado = treinadorService.createTreinador(treinador); // ou save
+        return ResponseEntity.ok(atualizado);
+    }
 }

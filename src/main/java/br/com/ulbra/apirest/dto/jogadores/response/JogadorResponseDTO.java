@@ -5,26 +5,17 @@ public class JogadorResponseDTO {
     private JogadorTreinadorDTO treinador;
 
     public JogadorResponseDTO() {}
+
     public JogadorResponseDTO(String content, JogadorTreinadorDTO treinador){
         this.content = content;
         this.treinador = treinador;
     }
 
+    public String getContent() { return content; }
 
+    public void setContent(String content) { this.content = content; }
 
-    public String getContent() {
-        return content;
-    }
+    public JogadorTreinadorDTO getTreinador() { return treinador; }
 
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public JogadorTreinadorDTO getTreinador() {
-        return treinador;
-    }
-
-    public void setTreinador(JogadorTreinadorDTO treinador) {
-        this.treinador = treinador;
-    }
+    public void setTreinador(JogadorTreinadorDTO treinador) { this.treinador = treinador; }
 }

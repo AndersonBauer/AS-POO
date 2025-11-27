@@ -21,6 +21,41 @@ public class JogadorService {
         this.treinadorRepository = treinadorRepository;
     }
 
+    public JogadorResponseDTO getJogadorById(Long id) {
+        Jogador jogador = jogadorRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Jogador não encontrado"));
+
+        return new JogadorResponseDTO(
+                jogador.getContent(),
+                new JogadorTreinadorDTO(jogador.getTreinador().getNome())
+        );
+    }
+
+    public Jogador updateJogador(Long id, JogadorRequest jogadorAtualizado) {
+        Jogador jogador = jogadorRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Jogador não encontrado"));
+
+        // Atualiza o conteúdo
+        jogador.setContent(jogadorAtualizado.getContent());
+
+        // Atualiza o treinador se for passado
+        if (jogadorAtualizado.getTreinadorId() != null) {
+            Treinador treinador = treinadorRepository.findById(jogadorAtualizado.getTreinadorId())
+                    .orElseThrow(() -> new RuntimeException("Treinador não encontrado"));
+            jogador.setTreinador(treinador);
+        }
+
+        return jogadorRepository.save(jogador);
+    }
+
+    public void deleteJogador(Long id) {
+        Jogador jogador = jogadorRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Jogador não encontrado"));
+        jogadorRepository.delete(jogador);
+    }
+
+
+
     public List<JogadorResponseDTO> getAllJogadores() {
         return this.jogadorRepository.findAll()
                 .stream()
