@@ -8,6 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TreinadorService {
     private TreinadorRepository treinadorRepository;
@@ -20,8 +22,9 @@ public class TreinadorService {
         return this.treinadorRepository.findById(id).orElseThrow();
     }
 
-    public Page<TreinadorResponseDTO> getTreinadores(Pageable pageable) {
-        return this.treinadorRepository.findAll(pageable)
+    public List<TreinadorResponseDTO> getTreinadores() {
+        return this.treinadorRepository.findAll()
+                .stream()
                 .map(item -> new TreinadorResponseDTO(
                         item.getNome(),
                         item.getTitulos(),
@@ -33,7 +36,8 @@ public class TreinadorService {
                                         jogador.getContent()
                                 ))
                                 .toList()
-                ));
+                ))
+                .toList();
     }
 
     public Treinador createTreinador(Treinador treinador) {

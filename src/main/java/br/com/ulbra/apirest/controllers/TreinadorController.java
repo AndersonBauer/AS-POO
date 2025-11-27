@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/treinadores")
@@ -19,8 +20,8 @@ public class TreinadorController {
     public TreinadorController(TreinadorService treinadorService){this.treinadorService = treinadorService;}
 
     @GetMapping
-    public ResponseEntity<Page<TreinadorResponseDTO>> getTreinadores(Pageable pageable){
-        return ResponseEntity.ok(this.treinadorService.getTreinadores(pageable));
+    public ResponseEntity<List<TreinadorResponseDTO>> getTreinadores() {
+        return ResponseEntity.ok(treinadorService.getTreinadores());
     }
 
     @GetMapping("/{id}")
