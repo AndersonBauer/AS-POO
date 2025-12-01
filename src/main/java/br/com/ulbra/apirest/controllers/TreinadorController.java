@@ -51,7 +51,6 @@ public class TreinadorController {
         treinador.setNome(treinadorAtualizado.getNome());
         treinador.setTitulos(treinadorAtualizado.getTitulos());
         treinador.setPremiosIndividuais(treinadorAtualizado.getPremiosIndividuais());
-        // Se quiser atualizar jogadores, faz isso separado
 
         Treinador atualizado = treinadorService.createTreinador(treinador); // ou save
         return ResponseEntity.ok(atualizado);

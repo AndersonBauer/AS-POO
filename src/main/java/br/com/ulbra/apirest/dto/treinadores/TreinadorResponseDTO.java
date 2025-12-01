@@ -6,12 +6,22 @@ import java.util.List;
 public class TreinadorResponseDTO {
     private String nome;
     private String titulos;
+    private String premiosIndividuais;
     private List<TreinadorJogadorDTO> jogadores = new ArrayList<>();
 
     public TreinadorResponseDTO(String nome, String titulos, String premiosIndividuais, List<TreinadorJogadorDTO> jogadores){
         this.nome = nome;
         this.titulos = titulos;
         this.jogadores = jogadores;
+        this.premiosIndividuais = premiosIndividuais;
+    }
+
+    public String getPremiosIndividuais() {
+        return premiosIndividuais;
+    }
+
+    public void setPremiosIndividuais(String premiosIndividuais) {
+        this.premiosIndividuais = premiosIndividuais;
     }
 
     public String getNome() {
